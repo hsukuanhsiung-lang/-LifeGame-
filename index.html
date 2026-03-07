@@ -144,18 +144,18 @@ textarea.m-inp{resize:none;min-height:80px}
 .daily-prog-title{font-size:36px;font-weight:900;color:var(--accent);line-height:1;letter-spacing:-1px}
 .daily-prog-sub{font-size:13px;color:#7070888;margin-top:6px}
 
-.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
+.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 10px}
 .dcard{background:#0d0d14;border:1px solid #1a1a24;border-radius:16px;padding:14px;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none;transition:border-color .2s,background .2s;min-height:130px;display:flex;flex-direction:column;justify-content:flex-end}
 .dcard.dragging{opacity:.4;transform:scale(.97)}
 .dcard-del{display:none}
-.fcard{background:#17171d;border:1px solid #2a2a38;border-radius:14px;padding:14px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:border-color .15s,opacity .2s}
+.fcard{background:#17171d;border:1px solid #2a2a38;border-radius:12px;padding:10px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:border-color .15s,opacity .2s;min-height:70px}
 .fcard-del{position:absolute;bottom:10px;right:10px;width:22px;height:22px;border-radius:6px;background:#ff3b3022;border:1px solid #ff3b3066;color:#ff3b30;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;line-height:1}
 .dcard.done{background:#0d2018;border-color:#2a4a35}
 .dcard.fail{background:#200a0a;border-color:#4a1a1a}
-.dcard-ic{font-size:38px;position:absolute;top:12px;left:12px;line-height:1}
-.dcard-name{font-size:15px;font-weight:700;color:#e0e0ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.dcard-rwd{font-size:11px;color:#666680}
-.dcard-chk{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:6px;border:1.5px solid #2a2a38;background:#12121a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:transparent}
+.dcard-ic{font-size:30px;position:absolute;top:8px;left:8px;line-height:1}
+.dcard-name{font-size:13px;font-weight:700;color:#e0e0ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.dcard-rwd{font-size:10px;color:#666680}
+.dcard-chk{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:6px;border:1.5px solid #2a2a38;background:#12121a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:transparent}
 .dcard.done .dcard-chk{background:var(--gr);border-color:var(--gr);color:#fff}
 .dcard.fail .dcard-chk{background:var(--rd);border-color:var(--rd);color:#fff}
 .dcard-strk{margin-top:3px}
@@ -166,9 +166,18 @@ textarea.m-inp{resize:none;min-height:80px}
 
 .fcard.violated{background:var(--rdd);border-color:var(--rd);position:relative}
 .fcard{position:relative}
-.fcard-ic{font-size:24px;margin-bottom:6px}
-.fcard-name{font-size:14px;font-weight:700}
-.fcard-days{font-size:11px;color:var(--text2);margin-top:4px}
+.fcard-ic{font-size:20px;margin-bottom:2px}
+.fcard-name{font-size:13px;font-weight:700}
+.fcard-days{font-size:10px;color:var(--text2);margin-top:2px}
+
+.tl-sub-wrap{display:flex;align-items:center;gap:4px}
+.tl-sub-del{background:#ff3b3020;border:1px solid #ff3b3066;color:#ff453a;border-radius:10px;width:18px;height:18px;font-size:12px;line-height:16px;cursor:pointer}
+.tl-slot.is-now{position:relative;display:flex;align-items:center;justify-content:center;color:#111;font-size:10px;font-weight:700}
+.tl-now-time{background:#fff8;border-radius:6px;padding:1px 3px;color:#111}
+#mem-category-tabs{display:flex;gap:6px;padding:0 14px 8px;overflow-x:auto;scrollbar-width:none}
+#mem-category-tabs::-webkit-scrollbar{display:none}
+.mem-cat-btn{border:1px solid #2a2a38;background:#17171d;color:#9090a8;border-radius:16px;padding:6px 10px;font-size:12px;white-space:nowrap;cursor:pointer}
+.mem-cat-btn.active{background:var(--accent);color:#111;border-color:var(--accent)}
 
 /* ==================== TASK SYSTEM ==================== */
 /* Task Filter Tabs (新的6个筛选标签) */
@@ -530,20 +539,20 @@ textarea.m-inp{resize:none;min-height:80px}
 .daily-prog-sub{font-size:13px;color:#7070a0;margin-top:6px}
 .daily-add-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;background:#1e1e28;border:1.5px dashed #363648;border-radius:12px;font-size:13px;font-weight:700;color:#7070a0;cursor:pointer;margin:0 14px 10px;width:calc(100% - 28px);justify-content:center;transition:all .15s}
 .daily-add-btn:active{background:#1e1a0a;border-color:var(--accent);color:var(--accent)}
-.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
+.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 10px}
 .forbid-grid{padding:0 14px;display:flex;flex-direction:column;gap:6px}
 
 /* ── DCARD (daily task card) — v12 style ── */
-.dcard{background:#0d0d14;border:1px solid #1a1a24;border-radius:16px;padding:14px;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none;transition:border-color .2s,background .2s;min-height:130px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.dcard{background:#0d0d14;border:1px solid #1a1a24;border-radius:14px;padding:10px;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none;transition:border-color .2s,background .2s;min-height:100px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .dcard.done{background:#0d2018;border-color:#2a4a35}
 .dcard.fail{background:#200a0a;border-color:#4a1a1a}
-.dcard-ic{font-size:38px;position:absolute;top:12px;left:12px;line-height:1}
-.dcard-chk{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:6px;border:1.5px solid #2a2a38;background:#12121a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:transparent}
+.dcard-ic{font-size:30px;position:absolute;top:8px;left:8px;line-height:1}
+.dcard-chk{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:6px;border:1.5px solid #2a2a38;background:#12121a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:transparent}
 .dcard.done .dcard-chk{background:var(--accent);border-color:var(--accent);color:#0d0d10}
 .dcard.fail .dcard-chk{background:#ff453a;border-color:#ff453a;color:#fff}
 .dcard-center{display:flex;flex-direction:column;margin-top:auto}
-.dcard-name{font-size:15px;font-weight:700;color:#e0e0ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.dcard-rwd{font-size:11px;color:#666680}
+.dcard-name{font-size:13px;font-weight:700;color:#e0e0ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.dcard-rwd{font-size:10px;color:#666680}
 .dcard-del{display:none}
 .dcard-strk{margin-top:3px}
 .dcard-top{display:flex;align-items:flex-start;gap:10px}
@@ -689,7 +698,10 @@ textarea.m-inp{resize:none;min-height:80px}
         <button id="act-btn-countup" onclick="startCountUp()" style="flex:1;padding:14px;border-radius:12px;border:none;background:#dcfce7;color:#16a34a;font-size:14px;font-weight:700;cursor:pointer">▶️ 正计时</button>
         <button id="act-btn-countdown" onclick="startCountDown()" style="flex:1;padding:14px;border-radius:12px;border:none;background:#fef3c7;color:#92400e;font-size:14px;font-weight:700;cursor:pointer">⏱️ 倒计时</button>
       </div>
-      <button id="act-btn-stop" onclick="stopTimer()" style="display:none;width:100%;padding:14px;border-radius:12px;border:none;background:#fee2e2;color:#dc2626;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:12px">⏹️ 停止</button>
+      <div id="act-running-controls" style="display:none;gap:8px;margin-bottom:12px">
+        <button id="act-btn-pause" onclick="toggleTimerPause()" style="flex:1;padding:14px;border-radius:12px;border:none;background:#dbeafe;color:#1d4ed8;font-size:14px;font-weight:700;cursor:pointer">⏸️ 暂停</button>
+        <button id="act-btn-stop" onclick="stopTimer()" style="flex:1;padding:14px;border-radius:12px;border:none;background:#fee2e2;color:#dc2626;font-size:14px;font-weight:700;cursor:pointer">⏹️ 结束</button>
+      </div>
     </div></div>
     <div style="padding:0 16px 20px"><div style="font-size:11px;color:#aeaeb2;margin-bottom:8px;font-weight:700;letter-spacing:.3px">⚡ 快速添加时长</div>
       <div class="dur-pills">
@@ -1348,6 +1360,7 @@ textarea.m-inp{resize:none;min-height:80px}
       <button style="flex:1;padding:8px;background:#17171d;border:1px solid #2a2a38;border-radius:8px;color:#f5a623;cursor:pointer;font-weight:bold;font-size:12px" onclick="showMemoryText()">📋 查看文本</button>
       <button style="flex:1;padding:8px;background:#17171d;border:1px solid #2a2a38;border-radius:8px;color:#f5a623;cursor:pointer;font-weight:bold;font-size:12px" onclick="downloadDataFile()">💾 保存</button>
     </div>
+    <div id="mem-category-tabs"></div>
     <div id="mem-list"></div>
   </div>
 
@@ -1801,6 +1814,10 @@ function compDayAttr(ds){
 // NAV
 // ============================================================
 function nav(page,btn){
+  if(typeof ACTION_STATE!=='undefined'&&ACTION_STATE.timerRunning&&page!=='action'){
+    showToast('计时进行中，请先暂停或结束');
+    return;
+  }
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');b.classList.remove('inner-active');});
   var pg=document.getElementById('pg-'+page);
@@ -2105,7 +2122,7 @@ function renderTLSubs(){
   if(!S.tlCat||S.tlCat==='__clear'){document.getElementById('tl-subs').innerHTML='';return;}
   var subs=S.catSubs[S.tlCat]||[];
   var html=subs.map(function(s){
-    return '<button class="tl-sub'+(S.tlSub===s.k?' active':'')+'" onclick="selSub(\''+s.k+'\')">'+s.l+'</button>';
+    return '<span class="tl-sub-wrap"><button class="tl-sub'+(S.tlSub===s.k?' active':'')+'" onclick="selSub(\''+s.k+'\')">'+s.l+'</button><button class="tl-sub-del" onclick="delTLSub(event,\''+s.k+'\')">×</button></span>';
   }).join('');
   html+='<button class="tl-add-sub" id="tl-add-sub-btn">+ 添加小项</button>';
   document.getElementById('tl-subs').innerHTML=html;
@@ -2119,6 +2136,25 @@ function renderTLSubs(){
     S.catSubs[S.tlCat].push({k:nk,l:name.trim()});
     S.tlSub=nk;sv();renderTLSubs();
   });
+}
+
+function delTLSub(e,subKey){
+  e.stopPropagation();
+  var subs=S.catSubs[S.tlCat]||[];
+  var subObj=subs.find(function(s){return s.k===subKey;});
+  if(!subObj)return;
+  if(!confirm('确定删除小项「'+subObj.l+'」吗？相关时间记录会一并删除。'))return;
+  Object.keys(S.tl||{}).forEach(function(ds){
+    var g=S.tl[ds]||{};
+    Object.keys(g).forEach(function(slot){
+      if(g[slot]&&g[slot].cat===S.tlCat&&g[slot].sub===subKey)delete g[slot];
+    });
+  });
+  if(S.mems)S.mems=S.mems.filter(function(m){return m.memKey!==(S.tlDate+'|'+S.tlCat+'|'+subKey) && !(m.memKey&&m.memKey.split('|')[1]===S.tlCat&&m.memKey.split('|')[2]===subKey);});
+  S.catSubs[S.tlCat]=subs.filter(function(s){return s.k!==subKey;});
+  var left=S.catSubs[S.tlCat]||[];
+  S.tlSub=left.length?left[0].k:'';
+  sv();renderTLSubs();renderTLGrid();renderTLSum();renderMem();
 }
 
 function selSub(k){S.tlSub=k;sv();renderTLSubs();}
@@ -2146,7 +2182,7 @@ function renderTLGrid(){
         var sl=p2(h)+':'+QS[q];
         var e=g[sl];var cat=e?CATS.find(function(c){return c.k===e.cat;}):null;
         var isNow=(now&&h===nowH&&q===nowQ);
-        html+='<div class="tl-slot'+(e?' filled '+cat.cls:'')+(isNow?' is-now':'')+'" onclick="togSlot(\''+sl+'\')"></div>';
+        html+='<div class="tl-slot'+(e?' filled '+cat.cls:'')+(isNow?' is-now':'')+'" onclick="togSlot(\''+sl+'\')">'+(isNow?'<span class="tl-now-time">'+sl+'</span>':'')+'</div>';
       }
     }
   }
@@ -2157,7 +2193,7 @@ function renderTLGrid(){
       var sl=p2(h)+':'+QS[q];
       var e=g[sl];var cat=e?CATS.find(function(c){return c.k===e.cat;}):null;
       var isNow=(now&&h===nowH&&q===nowQ);
-      html+='<div class="tl-slot'+(e?' filled '+cat.cls:'')+(isNow?' is-now':'')+'" onclick="togSlot(\''+sl+'\')"></div>';
+      html+='<div class="tl-slot'+(e?' filled '+cat.cls:'')+(isNow?' is-now':'')+'" onclick="togSlot(\''+sl+'\')">'+(isNow?'<span class="tl-now-time">'+sl+'</span>':'')+'</div>';
     }
   }
   document.getElementById('tl-grid').innerHTML=html;
@@ -2287,6 +2323,13 @@ function cycleTask(id,isForbid){
   var list=isForbid?(S.forbid||[]):S.daily;
   var t=list.find(function(x){return x.id===id;});
   if(!t)return;
+  if(isForbid&&t.st==='p'){
+    var startDate=prompt('确定开始「'+t.n+'」吗？\n请输入开始日期（YYYY-MM-DD）',tod());
+    if(startDate===null)return;
+    startDate=(startDate||'').trim()||tod();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(startDate)){showToast('日期格式应为 YYYY-MM-DD');return;}
+    t.startDate=startDate;
+  }
   var today=tod();
   // Always cycle: p→done→fail→p
   var states=['p','d','f'];
@@ -2356,7 +2399,7 @@ function renderDaily(){
     if(dTab==='side-long')  return t.dtype==='side-long'||(t.type==='side'&&(t.period==='long'||t.period==='longterm'));
     if(dTab==='delayed')    return t.delayed&&!t.done;
     return true;
-  });
+  }).slice(0,8);
   // Restore active tab button
   var tabBtns=document.querySelectorAll('.dtt-btn');
   tabBtns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-type')===(S.dailyTab||'all'));});
@@ -2380,13 +2423,13 @@ function renderDaily(){
       +'</div>';
   }).join('');
 
-  document.getElementById('forbid-grid').innerHTML=(S.forbid||[]).map(function(t){
+  document.getElementById('forbid-grid').innerHTML=(S.forbid||[]).slice(0,2).map(function(t){
     var cls='fcard'+(t.st==='f'?' violated':'');
     var id=t.id;
     return ['<div class="'+cls+'" onclick="cycleTask(\''+id+'\',true)">',
       '<div class="fcard-ic">'+t.ic+'</div>',
       '<div class="fcard-name">'+t.n+'</div>',
-      '<div class="fcard-days">'+((t.winStreak||0)>0?'已坚守'+t.winStreak+'天✓':'待记录')+'</div>',
+      '<div class="fcard-days">'+((t.winStreak||0)>0?'已坚守'+t.winStreak+'天✓':'待记录')+(t.startDate?(' · 从'+t.startDate+'开始'):'')+'</div>',
       '<div class="fcard-del" onclick="event.stopPropagation();delDailyItem(\''+id+'\',true)">×</div>',
       '</div>'
     ].join('');
@@ -2851,6 +2894,8 @@ function renderMem(){
   var mems=S.mems||[];
   var el=document.getElementById('mem-list');
   if(!el)return;
+  if(!S.memCategory)S.memCategory='all';
+  if(!S.memSubCategory)S.memSubCategory='';
   // Stats bar
   var statsEl=document.getElementById('mem-stats');
   if(statsEl){
@@ -2859,9 +2904,41 @@ function renderMem(){
     statsEl.textContent='已完成任务 '+taskCount+' 次　个人记忆 '+manualCount+' 条';
   }
 
-  // Split into task history vs manual memories
-  var taskHist=mems.filter(function(m){return m.taskId;}).slice().reverse();
-  var manualMems=mems.filter(function(m){return !m.taskId;}).slice().reverse();
+  var memTabsEl=document.getElementById('mem-category-tabs');
+  if(memTabsEl){
+    var tabs=[
+      {k:'all',l:'全部'},
+      {k:'time',l:'时间'},
+      {k:'action',l:'行动'},
+      {k:'challenge',l:'挑战'},
+      {k:'task',l:'任务'}
+    ];
+    memTabsEl.innerHTML=tabs.map(function(t){
+      return '<button class="mem-cat-btn'+(S.memCategory===t.k?' active':'')+'" onclick="setMemCategory(\''+t.k+'\')">'+t.l+'</button>';
+    }).join('');
+  }
+
+  var filtered=mems.filter(function(m){
+    if(S.memCategory==='all')return true;
+    if(S.memCategory==='time')return !!m.memKey;
+    if(S.memCategory==='action')return m.tags&&m.tags.indexOf('行动')>=0;
+    if(S.memCategory==='challenge')return m.tags&&m.tags.indexOf('每日挑战')>=0;
+    if(S.memCategory==='task')return !!m.taskId && !(m.tags&&m.tags.indexOf('每日挑战')>=0);
+    return true;
+  });
+  var subTabs='';
+  if(S.memCategory==='challenge'){
+    var st=S.memSubCategory||'daily';
+    subTabs='<div style="display:flex;gap:6px;padding:0 14px 8px"><button class="mem-cat-btn'+(st==='daily'?' active':'')+'" onclick="setMemSubCategory(\'daily\')">每日任务</button><button class="mem-cat-btn'+(st==='forbid'?' active':'')+'" onclick="setMemSubCategory(\'forbid\')">禁止事项</button></div>';
+    filtered=filtered.filter(function(m){
+      var tx=(m.text||'');
+      if(st==='forbid')return /禁止|戒|违/.test(tx);
+      return !/禁止|戒|违/.test(tx);
+    });
+  }
+
+  var taskHist=filtered.filter(function(m){return m.taskId;}).slice().reverse();
+  var manualMems=filtered.filter(function(m){return !m.taskId;}).slice().reverse();
 
   var html='';
 
@@ -2897,9 +2974,13 @@ function renderMem(){
     }).join('');
   }
 
-  if(!html)html='<div class="mem-empty">还没有记忆\n点右上角 + 记录</div>';
+  if(!html)html='<div class="mem-empty">该分类下还没有记忆</div>';
+  html=subTabs+html;
   el.innerHTML=html;
 }
+
+function setMemCategory(cat){S.memCategory=cat;S.memSubCategory='';sv();renderMem();}
+function setMemSubCategory(sub){S.memSubCategory=sub;sv();renderMem();}
 
 // ========== 简单的记忆文本显示 ==========
 function showMemoryText(){
@@ -4844,6 +4925,7 @@ function skipIntro(){
 var _transitioning=false;
 
 function switchWorld(world){
+  if(typeof ACTION_STATE!=='undefined'&&ACTION_STATE.timerRunning){showToast('计时进行中，请先暂停或结束');return;}
   if(_transitioning)return;
   if(_currentWorld===world){_applyWorld(world);return;}
   _transitioning=true;
@@ -5637,7 +5719,7 @@ function deleteMemory(memId){
 // ═══════════════════════════════════════════════════════════
 // ACTION PAGE
 // ═══════════════════════════════════════════════════════════
-var ACTION_STATE={selectedCat:null,selectedSub:null,timerMode:null,timerRunning:false,startTime:null,elapsedSeconds:0,countdownTarget:0,timerInterval:null};
+var ACTION_STATE={selectedCat:null,selectedSub:null,timerMode:null,timerRunning:false,timerPaused:false,startTime:null,elapsedSeconds:0,countdownTarget:0,timerInterval:null,elapsedBeforePause:0,lastDisplaySeconds:0};
 function selectActionCat(cat){ACTION_STATE.selectedCat=cat;ACTION_STATE.selectedSub=null;var cats=['life','power','intel','agile','free','rest'];cats.forEach(function(c){var btn=document.getElementById('act-cat-'+c);if(btn){if(c===cat){btn.style.opacity='1';btn.style.transform='scale(1.05)';}else{btn.style.opacity='0.5';btn.style.transform='scale(1)';}}});showActionSubcats(cat);}
 
 // 行动页面：选择子分类
@@ -5668,10 +5750,11 @@ function selectActionSubcat(cat,sub){
   closeM();
 }
 
-function startCountUp(){if(!ACTION_STATE.selectedCat){showToast('请先选择属性类别！');return;}if(ACTION_STATE.timerRunning){showToast('计时器已在运行中');return;}ACTION_STATE.timerMode='countup';ACTION_STATE.timerRunning=true;ACTION_STATE.startTime=Date.now();ACTION_STATE.elapsedSeconds=0;document.getElementById('act-btn-countup').style.display='none';document.getElementById('act-btn-countdown').style.display='none';document.getElementById('act-btn-stop').style.display='block';document.getElementById('action-status').textContent='⏱️ 正计时进行中...';ACTION_STATE.timerInterval=setInterval(updateTimer,100);}
-function startCountDown(){if(!ACTION_STATE.selectedCat){showToast('请先选择属性类别！');return;}if(ACTION_STATE.timerRunning){showToast('计时器已在运行中');return;}var minutes=prompt('请输入倒计时分钟数（例如：25）','25');if(!minutes||isNaN(minutes)||parseInt(minutes)<=0){showToast('无效的时长');return;}ACTION_STATE.timerMode='countdown';ACTION_STATE.timerRunning=true;ACTION_STATE.startTime=Date.now();ACTION_STATE.countdownTarget=parseInt(minutes)*60;ACTION_STATE.elapsedSeconds=0;document.getElementById('act-btn-countup').style.display='none';document.getElementById('act-btn-countdown').style.display='none';document.getElementById('act-btn-stop').style.display='block';document.getElementById('action-status').textContent='⏱️ 倒计时进行中...';ACTION_STATE.timerInterval=setInterval(updateTimer,100);}
-function updateTimer(){var now=Date.now();ACTION_STATE.elapsedSeconds=Math.floor((now-ACTION_STATE.startTime)/1000);var displaySeconds;if(ACTION_STATE.timerMode==='countdown'){displaySeconds=Math.max(0,ACTION_STATE.countdownTarget-ACTION_STATE.elapsedSeconds);if(displaySeconds===0){stopTimer();showToast('⏰ 倒计时完成！');return;}}else{displaySeconds=ACTION_STATE.elapsedSeconds;}var hours=Math.floor(displaySeconds/3600);var minutes=Math.floor((displaySeconds%3600)/60);var seconds=displaySeconds%60;var timeStr=(hours<10?'0'+hours:hours)+':'+(minutes<10?'0'+minutes:minutes)+':'+(seconds<10?'0'+seconds:seconds);document.getElementById('action-timer-display').textContent=timeStr;}
-function stopTimer(){if(!ACTION_STATE.timerRunning)return;clearInterval(ACTION_STATE.timerInterval);ACTION_STATE.timerRunning=false;var finalMinutes=Math.floor(ACTION_STATE.elapsedSeconds/60);if(finalMinutes>0){addTimeToAttr(ACTION_STATE.selectedCat,finalMinutes);saveActionToMemory(ACTION_STATE.selectedCat,finalMinutes,ACTION_STATE.timerMode);showToast('✅ 已记录 '+finalMinutes+' 分钟！');}document.getElementById('act-btn-countup').style.display='block';document.getElementById('act-btn-countdown').style.display='block';document.getElementById('act-btn-stop').style.display='none';document.getElementById('action-timer-display').textContent='00:00:00';document.getElementById('action-status').textContent='已停止，可继续计时';renderTodayActions();}
+function startCountUp(){if(!ACTION_STATE.selectedCat){showToast('请先选择属性类别！');return;}if(ACTION_STATE.timerRunning){showToast('计时器已在运行中');return;}ACTION_STATE.timerMode='countup';ACTION_STATE.timerRunning=true;ACTION_STATE.timerPaused=false;ACTION_STATE.startTime=Date.now();ACTION_STATE.elapsedBeforePause=0;ACTION_STATE.elapsedSeconds=0;ACTION_STATE.lastDisplaySeconds=0;document.getElementById('act-btn-countup').style.display='none';document.getElementById('act-btn-countdown').style.display='none';document.getElementById('act-running-controls').style.display='flex';document.getElementById('act-btn-pause').textContent='⏸️ 暂停';document.getElementById('action-status').textContent='⏱️ 正计时进行中...';ACTION_STATE.timerInterval=setInterval(updateTimer,200);}
+function startCountDown(){if(!ACTION_STATE.selectedCat){showToast('请先选择属性类别！');return;}if(ACTION_STATE.timerRunning){showToast('计时器已在运行中');return;}var minutes=prompt('请输入倒计时分钟数（例如：25）','25');if(!minutes||isNaN(minutes)||parseInt(minutes)<=0){showToast('无效的时长');return;}ACTION_STATE.timerMode='countdown';ACTION_STATE.timerRunning=true;ACTION_STATE.timerPaused=false;ACTION_STATE.startTime=Date.now();ACTION_STATE.countdownTarget=parseInt(minutes)*60;ACTION_STATE.elapsedBeforePause=0;ACTION_STATE.elapsedSeconds=0;ACTION_STATE.lastDisplaySeconds=ACTION_STATE.countdownTarget;document.getElementById('act-btn-countup').style.display='none';document.getElementById('act-btn-countdown').style.display='none';document.getElementById('act-running-controls').style.display='flex';document.getElementById('act-btn-pause').textContent='⏸️ 暂停';document.getElementById('action-status').textContent='⏱️ 倒计时进行中...';ACTION_STATE.timerInterval=setInterval(updateTimer,200);}
+function updateTimer(){if(!ACTION_STATE.timerRunning||ACTION_STATE.timerPaused)return;var now=Date.now();ACTION_STATE.elapsedSeconds=ACTION_STATE.elapsedBeforePause+Math.floor((now-ACTION_STATE.startTime)/1000);var displaySeconds;if(ACTION_STATE.timerMode==='countdown'){displaySeconds=Math.max(0,ACTION_STATE.countdownTarget-ACTION_STATE.elapsedSeconds);if(displaySeconds===0){ACTION_STATE.lastDisplaySeconds=0;stopTimer();showToast('⏰ 倒计时完成！');return;}}else{displaySeconds=ACTION_STATE.elapsedSeconds;}ACTION_STATE.lastDisplaySeconds=displaySeconds;var hours=Math.floor(displaySeconds/3600);var minutes=Math.floor((displaySeconds%3600)/60);var seconds=displaySeconds%60;var timeStr=(hours<10?'0'+hours:hours)+':'+(minutes<10?'0'+minutes:minutes)+':'+(seconds<10?'0'+seconds:seconds);document.getElementById('action-timer-display').textContent=timeStr;}
+function toggleTimerPause(){if(!ACTION_STATE.timerRunning)return;var btn=document.getElementById('act-btn-pause');if(!ACTION_STATE.timerPaused){ACTION_STATE.elapsedBeforePause=ACTION_STATE.elapsedSeconds;ACTION_STATE.timerPaused=true;clearInterval(ACTION_STATE.timerInterval);btn.textContent='▶️ 继续';document.getElementById('action-status').textContent='已暂停';}else{ACTION_STATE.timerPaused=false;ACTION_STATE.startTime=Date.now();ACTION_STATE.timerInterval=setInterval(updateTimer,200);btn.textContent='⏸️ 暂停';document.getElementById('action-status').textContent=(ACTION_STATE.timerMode==='countdown'?'⏱️ 倒计时进行中...':'⏱️ 正计时进行中...');}}
+function stopTimer(){if(!ACTION_STATE.timerRunning)return;clearInterval(ACTION_STATE.timerInterval);if(!ACTION_STATE.timerPaused){ACTION_STATE.elapsedSeconds=ACTION_STATE.elapsedBeforePause+Math.floor((Date.now()-ACTION_STATE.startTime)/1000);}else{ACTION_STATE.elapsedSeconds=ACTION_STATE.elapsedBeforePause;}ACTION_STATE.timerRunning=false;ACTION_STATE.timerPaused=false;var finalMinutes=Math.floor(ACTION_STATE.elapsedSeconds/60);if(finalMinutes>=15){addTimeToAttr(ACTION_STATE.selectedCat,finalMinutes);saveActionToMemory(ACTION_STATE.selectedCat,finalMinutes,ACTION_STATE.timerMode);showToast('✅ 已记录 '+finalMinutes+' 分钟！');}else{showToast('未达到15分钟，不计入属性');}document.getElementById('act-btn-countup').style.display='block';document.getElementById('act-btn-countdown').style.display='block';document.getElementById('act-running-controls').style.display='none';document.getElementById('action-timer-display').textContent='00:00:00';document.getElementById('action-status').textContent='已停止，可继续计时';ACTION_STATE.elapsedBeforePause=0;ACTION_STATE.elapsedSeconds=0;renderTodayActions();}
 function quickAddTime(minutes){
   if(!ACTION_STATE.selectedCat){showToast('请先选择属性类别！');return;}
   if(!ACTION_STATE.selectedSub){showToast('请先选择子分类！');return;}
