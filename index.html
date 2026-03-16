@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Task System">
 <meta name="theme-color" content="#0a0a0e">
-<title>Life System V1.12.4</title>
+<title>Life System V1.13.4</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -39,7 +39,7 @@ input[type=range]:focus{outline:none}
 input[type=range]:focus::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(245,166,35,0.3)}
 
 /* HEADER */
-#g-header{position:fixed;top:0;left:0;right:0;padding:12px 16px 8px;background:#0a0a0e;border-bottom:1px solid #1e1e2a;z-index:101}
+#g-header{position:fixed;top:0;left:0;right:0;padding:max(12px,env(safe-area-inset-top)) 16px 8px;background:#0a0a0e;border-bottom:1px solid #1e1e2a;z-index:101}
 #g-header-inner{display:flex;align-items:center;justify-content:space-between}
 .g-title{font-size:18px;font-weight:800;color:var(--accent)}
 .g-sub{font-size:11px;color:var(--text2);margin-top:1px}
@@ -49,7 +49,7 @@ input[type=range]:focus::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(245,166,
 /* APP */
 #app{flex:1;overflow:hidden;position:relative;min-height:0}
 .page{position:absolute;inset:0;overflow-x:hidden;display:flex;flex-direction:column;background:var(--bg);padding-bottom:100px}
-#content-area{flex:1;overflow-y:auto;overflow-x:hidden;padding:130px 0 120px}
+#content-area{flex:1;overflow-y:auto;overflow-x:hidden;padding:max(130px,130px + env(safe-area-inset-top)) 0 120px}
 
 /* SECTION */
 .sect{position:fixed;top:60px;left:0;right:0;height:40px;font-size:11px;color:var(--accent);padding:0 16px;display:flex;align-items:center;justify-content:space-between;letter-spacing:.3px;text-transform:uppercase;background:var(--bg);border-bottom:1px solid var(--border);z-index:99}
@@ -117,6 +117,7 @@ select.m-inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 
 /* DIFFICULTY BADGES */
 .diff-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:6px;font-weight:700;margin-left:4px}
+.diff-F{background:#15151a;color:#6b7280;border:1px solid #2a2a35}
 .diff-E{background:#1e1e26;color:#9090a8;border:1px solid #363648}
 .diff-D{background:#0d2018;color:#32d74b;border:1px solid #1a4a2a}
 .diff-C{background:#0a1828;color:#4a9eff;border:1px solid #1a3a5a}
@@ -127,6 +128,7 @@ select.m-inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 .diff-SSS{background:linear-gradient(135deg,#4a9eff,#a855f7,#ff453a);color:#ffffff;border:1px solid transparent;border-image:linear-gradient(135deg,#4a9eff,#a855f7,#ff453a) 1}
 
 /* TASK DIFFICULTY CARD BACKGROUNDS */
+.tc-F{background:#131318;border:2px solid #6b7280;box-shadow:0 2px 10px rgba(107,114,128,0.15)}
 .tc-E{background:#17171d;border:2px solid #9090a8;box-shadow:0 2px 10px rgba(144,144,168,0.25)}
 .tc-D{background:#0d2018;border:2px solid #32d74b;box-shadow:0 2px 10px rgba(50,215,75,0.25)}
 .tc-C{background:#0a1828;border:2px solid #4a9eff;box-shadow:0 2px 10px rgba(74,158,255,0.25)}
@@ -158,6 +160,7 @@ select.m-inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 .subtask-chk.done{background:var(--gr);border-color:var(--gr);color:#fff}
 .subtask-toggle{font-size:11px;color:var(--accent);cursor:pointer;margin:6px 0 2px 30px;display:inline-flex;align-items:center;gap:4px;font-weight:600}
 .subtask-diff-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:6px;font-weight:700;margin-left:4px}
+.subtask-diff-badge.diff-F{background:#0f0f14;color:#6b7280;border:1px solid #1f1f28}
 .subtask-diff-badge.diff-E{background:#1e1e26;color:#9090a8;border:1px solid #363648}
 .subtask-diff-badge.diff-D{background:#0d2018;color:#32d74b;border:1px solid #1a4a2a}
 .subtask-diff-badge.diff-C{background:#0a1828;color:#4a9eff;border:1px solid #1a3a5a}
@@ -705,6 +708,7 @@ select.m-inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 <script>
 // ==================== DATA ====================
 var DIFFS=[
+  {k:'F',l:'F级',c:'#6b7280',desc:'简单日常事项，随手可完成'},
   {k:'E',l:'E级',c:'#9090a8',desc:'数小时内完成的单一事项'},
   {k:'D',l:'D级',c:'#32d74b',desc:'1-3天认真投入完成'},
   {k:'C',l:'C级',c:'#4a9eff',desc:'1-2周持续努力完成'},
@@ -714,7 +718,7 @@ var DIFFS=[
   {k:'SS',l:'SS级',c:'linear-gradient(90deg,#ff453a,#4a9eff)',desc:'影响数万人以上的重大成就'},
   {k:'SSS',l:'SSS级',c:'linear-gradient(90deg,#4a9eff,#a855f7,#ff453a)',desc:'改变行业或历史的传奇成就'}
 ];
-var DIFF_ORDER=['E','D','C','B','A','S','SS','SSS'];
+var DIFF_ORDER=['F','E','D','C','B','A','S','SS','SSS'];
 
 // Category structure
 // 新的两级导航结构：表世界/里世界
@@ -787,7 +791,7 @@ var CATEGORY_STRUCTURE={
 function mkDef(){
   var today=tod();
   return{
-    v:'1.12.4',
+    v:'1.13.4',
     primaryTab:'surface',
     secondaryTab:{surface:'task',inner:'me',offline:'rest'},
     tertiaryFilter:{today:'all',long:'all'},
@@ -825,7 +829,7 @@ function mkDef(){
         date:today,
         diff:'A',
         subtasks:[
-          {id:'t-lg-1',n:'AI编程代码更新至v2.0',done:false,diff:'D',daily:false},
+          {id:'t-lg-1',n:'AI编程代码更新至v2.0',done:false,diff:'D',daily:false,planDate:'2026-03-16'},
           {id:'t-lg-2',n:'完善背景故事和世界观',done:false,diff:'C',daily:false},
           {id:'t-lg-3',n:'确定游戏规则和玩法内容',done:false,diff:'C',daily:false}
         ]
@@ -846,7 +850,7 @@ function mkDef(){
           {id:'t-money-1-1',n:'给爸打电话问二叔泰国渠道',done:false,diff:'E',daily:false},
           {id:'t-money-1-2',n:'给Kai打电话问Andy泰国合作',done:false,diff:'E',daily:false},
           {id:'t-money-2',n:'柴姐的中医理疗',done:false,diff:'D',daily:false,sub:'体验后若有效，上班并学习，和柴姐开分店'},
-          {id:'t-money-2-1',n:'给柴姐打电话约体验',done:false,diff:'E',daily:false},
+          {id:'t-money-2-1',n:'给柴姐打电话约体验',done:false,diff:'E',daily:false,planDate:'2026-03-16'},
           {id:'t-money-3',n:'记账',done:false,diff:'E',daily:true,streak:0,failStreak:0,createDate:today}
         ]
       },
@@ -916,6 +920,93 @@ function mkDef(){
         subtasks:[
           {id:'t-author-1',n:'撰写《这就是未来》剧本',done:false,diff:'C',daily:false}
         ]
+      },
+      // ==================== 3月16日今日任务 ====================
+      // 今日主线
+      {
+        id:'t-today-1',
+        n:'二手微波炉',
+        sub:'阳光一百楼下商圈拆除，我妈吩咐去买个微波炉回来',
+        type:'main',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'E',
+        subtasks:[]
+      },
+      {
+        id:'t-today-2',
+        n:'给柴姐打电话约体验',
+        sub:'归属于柴姐的中医理疗长期任务',
+        type:'main',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'E',
+        subtasks:[]
+      },
+      {
+        id:'t-today-3',
+        n:'AI编程代码更新至v2.0',
+        sub:'归属于人生游戏长期任务',
+        type:'main',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'E',
+        subtasks:[]
+      },
+      {
+        id:'t-today-4',
+        n:'睡前必须剪辑完今日素材',
+        sub:'归属于life game vlog长期任务',
+        type:'main',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'E',
+        subtasks:[]
+      },
+      // 今日支线
+      {
+        id:'t-today-5',
+        n:'厨房卫生',
+        sub:'清洁厨房，保持整洁',
+        type:'side',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'F',
+        subtasks:[]
+      },
+      {
+        id:'t-today-6',
+        n:'洗晒所有脏衣服',
+        sub:'清洗并晾晒所有脏衣物',
+        type:'side',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'F',
+        subtasks:[]
+      },
+      {
+        id:'t-today-7',
+        n:'买菜',
+        sub:'采购今日所需食材',
+        type:'side',
+        period:'today',
+        done:false,
+        delayed:false,
+        date:today,
+        diff:'F',
+        subtasks:[]
       }
     ],
     // ==================== 禁止事项 ====================
@@ -952,7 +1043,7 @@ function mkDef(){
 
 var S=null;
 try{
-  var saved=localStorage.getItem('tasksystem_v1_12_4_data');
+  var saved=localStorage.getItem('lifegame_v1_13_4_data');
   if(saved)S=JSON.parse(saved);
 }catch(e){}
 if(!S)S=mkDef();
@@ -992,8 +1083,8 @@ var timerInterval=null;
 
 function sv(){
   try{
-    localStorage.setItem('tasksystem_v1_12_4_data',JSON.stringify(S));
-    localStorage.setItem('tasksystem_v1_12_4_backup',JSON.stringify(S));
+    localStorage.setItem('lifegame_v1_13_4_data',JSON.stringify(S));
+    localStorage.setItem('lifegame_v1_13_4_backup',JSON.stringify(S));
   }catch(e){}
 }
 
@@ -1226,10 +1317,10 @@ function renderHeader(){
   var dayEl=document.getElementById('g-day');
   if(dayEl){
     // v1.11.1: 2026-03-16成为Day 1
-    var startDate=localStorage.getItem('lifegame_start_date_v1124');
+    var startDate=localStorage.getItem('lifegame_start_date_v1132');
     if(!startDate){
       startDate='2026-03-16'; // 设定起始日期为2026年3月16日
-      localStorage.setItem('lifegame_start_date_v1124',startDate);
+      localStorage.setItem('lifegame_start_date_v1132',startDate);
     }
     var start=new Date(startDate);
     var now=new Date(tod());
@@ -1753,6 +1844,51 @@ function updateAddBtn(){
 function setPrimaryTab(tab,btn){enterLevel2(tab);}
 function setSecondaryTab(tab){enterLevel3(tab);}
 function updateFilterUI(){renderNav();}
+
+// ==================== 计划日期子任务功能 ====================
+// 递归获取指定日期的计划子任务（作为虚拟任务返回）
+function getPlannedSubtasksForDate(dateStr){
+  var plannedTasks=[];
+  if(!S.tasks)return plannedTasks;
+  
+  function findPlannedInSubtasks(task, subtasks, parentChain){
+    if(!subtasks)return;
+    subtasks.forEach(function(s){
+      if(s.planDate===dateStr&&!s.done){
+        // 创建父任务链描述
+        var parentDesc = parentChain.map(function(p){return p.n;}).join(' → ');
+        // 创建一个虚拟任务对象用于显示
+        plannedTasks.push({
+          id:'planned_'+task.id+'_'+s.id,
+          n:s.n,
+          sub:'来自: '+task.n+(parentDesc?' → '+parentDesc:''),
+          type:task.type,
+          period:'today',
+          done:false,
+          delayed:false,
+          date:dateStr,
+          diff:s.diff||'F',
+          isPlanned:true,
+          parentTaskId:task.id,
+          parentSubtaskId:s.id,
+          subtasks:[]
+        });
+      }
+      // 递归查找嵌套子任务
+      if(s.subtasks){
+        findPlannedInSubtasks(task, s.subtasks, parentChain.concat([s]));
+      }
+    });
+  }
+  
+  S.tasks.forEach(function(t){
+    if(t.period==='long'||t.period==='longterm'){
+      findPlannedInSubtasks(t, t.subtasks, []);
+    }
+  });
+  
+  return plannedTasks;
+}
 
 function checkDelayed(){
   var today=tod();
@@ -3466,15 +3602,23 @@ function renderTasks(){
   var filter=S.tertiaryFilter&&S.tertiaryFilter[period]?S.tertiaryFilter[period]:'all';
   var all=S.tasks||[];
   var tasks=[];
+  var todayStr=tod();
   
   if(period==='today'){
     if(filter==='all'){
       // 今日全部：显示所有今日未顺延的任务
       tasks=all.filter(function(t){return t.period==='today'&&!t.delayed;});
+      // 添加计划日期为今天的长期任务子任务（作为虚拟任务显示）
+      var plannedTasks=getPlannedSubtasksForDate(todayStr);
+      tasks=tasks.concat(plannedTasks);
     }else if(filter==='main'){
       tasks=all.filter(function(t){return t.type==='main'&&t.period==='today'&&!t.delayed;});
+      var plannedTasks=getPlannedSubtasksForDate(todayStr).filter(function(t){return t.type==='main';});
+      tasks=tasks.concat(plannedTasks);
     }else if(filter==='side'){
       tasks=all.filter(function(t){return t.type==='side'&&t.period==='today'&&!t.delayed;});
+      var plannedTasks=getPlannedSubtasksForDate(todayStr).filter(function(t){return t.type==='side';});
+      tasks=tasks.concat(plannedTasks);
     }else if(filter==='delayed'){
       // 顺延任务：显示所有今日任务中超时未完成的
       tasks=all.filter(function(t){return t.period==='today'&&t.delayed&&!t.done;});
@@ -3504,69 +3648,39 @@ function renderTasks(){
   renderHeader();
 }
 
-function taskCardHTML(t){
+function taskCardHTML(t, level){
+  level = level || 0;
   var tag='';
   if(t.delayed)tag='<span class="task-tag delayed">⏩ 顺延</span>';
   else if(t.type==='main')tag='<span class="task-tag main">🚩 主线</span>';
-  else tag='<span class="task-tag side">💠 支线</span>';
+  else if(t.type==='side')tag='<span class="task-tag side">💠 支线</span>';
   
   var periodTag='';
   var accExpTag='';
   if(t.period==='long'||t.period==='longterm'){
     periodTag='<span class="task-tag" style="margin-left:4px">📆 长期</span>';
-    // 计算长期任务所有子任务的累积经验
-    var subs=t.subtasks||[];
-    var totalSubExp=0;
-    subs.forEach(function(s){
-      if(s.done){
-        totalSubExp+=getExp(s.diff||'E');
-      }
-    });
-    if(totalSubExp>0){
-      accExpTag='<div style="margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:2px"><span class="task-tag" style="background:linear-gradient(135deg,#fbbf24,#f97316,#dc2626);color:#fff;font-weight:700;padding:4px 10px;font-size:12px;border:none;text-shadow:0 1px 2px rgba(0,0,0,0.5)">EXP '+formatExpShort(totalSubExp)+'</span><span style="font-size:9px;color:#9090a8">累计获得</span></div>';
-    }
   }
 
-  var diffBadge=t.diff?'<span class="diff-badge diff-'+(t.diff||'E')+'">'+(t.diff||'E')+'</span>':'';
-  var dc='tc-'+(t.diff||'E')+(t.done?' tc-done':'');
+  var diffBadge=t.diff?'<span class="diff-badge diff-'+(t.diff||'F')+'">'+(t.diff||'F')+'</span>':'';
+  var dc='tc-'+(t.diff||'F')+(t.done?' tc-done':'');
   var cc=t.done?' done':'';
 
-  var subs=t.subtasks||[];
-  var subRows=subs.map(function(s){
-    var sc=s.done?' done':'';
-    var ss=s.done?' style="text-decoration:line-through;opacity:.5"':'';
-    var subDiff=s.diff||'E';
-    var dailyBadge=s.daily?'<span class="daily-badge">每日</span>':'';
-    // 每日任务不显示等级徽章
-    var diffBadge=s.daily?'':'<span class="subtask-diff-badge diff-'+subDiff+'">'+subDiff+'</span>';
-    return '<div class="subtask-row" onclick="event.stopPropagation()">'
-      +'<div class="subtask-chk'+sc+'" data-tid="'+t.id+'" data-sid="'+s.id+'" onclick="event.stopPropagation();togSubtask(this)">'+(s.done?'✓':'')+'</div>'
-      +'<span'+ss+'>'+s.n+dailyBadge+diffBadge+'</span>'
-      +'</div>';
-  });
+  // 递归渲染子任务
+  var subHTML = renderSubtasksRecursive(t, level + 1);
   
-  var progressBar='';
-  if(subs.length>0){
-    var doneCount=subs.filter(function(s){return s.done;}).length;
-    var pct=Math.round(doneCount/subs.length*100);
-    var d=getDiff(t.diff||'E');
-    var progressColor=d.c.indexOf('gradient')>-1?(t.diff==='SS'?'#f5a623':'#a855f7'):d.c;
-    progressBar='<div style="margin:8px 0 4px">'
-      +'<div style="display:flex;justify-content:space-between;font-size:10px;color:#7070a0;margin-bottom:3px">'
-      +'<span>子任务进度</span><span>'+doneCount+'/'+subs.length+' ('+pct+'%)</span></div>'
-      +'<div class="progress-bar">'
-      +'<div class="progress-fill" style="width:'+pct+'%;background:'+progressColor+'"></div>'
-      +'</div></div>';
+  if(t.isPlanned){
+    return '<div class="task-card '+dc+'" data-task-id="'+t.id+'" data-sort-type="task" ondblclick="openEditTask(\''+t.parentTaskId+'\')">'
+      +'<div class="task-chk'+cc+'" onclick="event.stopPropagation();togPlannedSubtask(\''+t.parentTaskId+'\',\''+t.parentSubtaskId+'\')">'+(t.done?'✓':'')+'</div>'
+      +'<div class="task-info" style="width:100%;min-width:0">'
+      +'<div class="task-name">'+t.n+diffBadge+'</div>'
+      +(t.sub?'<div class="task-sub">'+t.sub+'</div>':'')
+      +'<div style="margin-top:4px;display:flex;align-items:center;gap:4px"><span class="task-tag" style="background:var(--accent);color:#0a0a0e">📅 今日计划</span>'+tag+'</div>'
+      +'</div>'
+      +'</div>';
   }
   
-  var isExpanded=t.subsExpanded||false;
-  var toggleBtn=subs.length>0?'<div class="subtask-toggle" onclick="event.stopPropagation();toggleSubList(\''+t.id+'\')">'
-    +(isExpanded?'▼ 收起子任务':'▶ 展开子任务 ('+subs.length+')')+'</div>':'';
-  var subListClass=isExpanded?'subtask-list':'subtask-list collapsed';
-  var subHTML=toggleBtn+(subs.length?'<div class="'+subListClass+'" id="sublist-'+t.id+'">'+subRows.join('')+'</div>':'')+progressBar;
-  
-  return '<div class="task-card '+dc+'" draggable="true" data-task-id="'+t.id+'" data-sort-type="task" ondragstart="dragStart(event,this)" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dragDrop(event,this)" ondblclick="openEditTask(\''+t.id+'\')">'
-    +'<div class="task-chk'+cc+'" onclick="event.stopPropagation();togTask(\''+t.id+'\')">'+(t.done?'✓':'')+'</div>'
+  return '<div class="task-card '+dc+'" draggable="'+(!level)+'" data-task-id="'+t.id+'" data-sort-type="task" '+(!level?'ondragstart="dragStart(event,this)" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dragDrop(event,this)"':'')+' ondblclick="openEditSubtaskRecursive(\''+t.id+'\')">'
+    +'<div class="task-chk'+cc+'" onclick="event.stopPropagation();'+(!level?'togTask(\''+t.id+'\')':'togNestedSubtask(\''+t.id+'\')')+'">'+(t.done?'✓':'')+'</div>'
     +'<div class="task-info" style="width:100%;min-width:0">'
     +'<div class="task-name">'+t.n+diffBadge+'</div>'
     +(t.sub?'<div class="task-sub">'+t.sub+'</div>':'')
@@ -3574,6 +3688,48 @@ function taskCardHTML(t){
     +subHTML
     +'</div>'
     +'</div>';
+}
+
+// 递归渲染子任务
+function renderSubtasksRecursive(parent, level){
+  var subs = parent.subtasks || [];
+  if(subs.length === 0) return '';
+  
+  var isExpanded = parent.subsExpanded !== false; // 默认展开
+  var toggleBtn = level <= 2 ? '<div class="subtask-toggle" onclick="event.stopPropagation();toggleSubListRecursive(\''+parent.id+'\')">'
+    +(isExpanded?'▼ 收起子任务':'▶ 展开子任务 ('+subs.length+')')+'</div>' : '';
+  
+  var subRows = subs.map(function(s){
+    var sc = s.done ? ' done' : '';
+    var ss = s.done ? ' style="text-decoration:line-through;opacity:.5"' : '';
+    var subDiff = s.diff || 'F';
+    var dailyBadge = s.daily ? '<span class="daily-badge">每日</span>' : '';
+    var diffBadge = s.daily ? '' : '<span class="subtask-diff-badge diff-'+subDiff+'">'+subDiff+'</span>';
+    
+    // 递归渲染嵌套子任务
+    var nestedHTML = renderSubtasksRecursive(s, level + 1);
+    
+    var html = '<div class="subtask-row" style="margin-left:'+(level * 12)+'px" onclick="event.stopPropagation()">'
+      +'<div class="subtask-chk'+sc+'" data-tid="'+parent.id+'" data-sid="'+s.id+'" onclick="event.stopPropagation();togNestedSubtask(\''+s.id+'\')">'+(s.done?'✓':'')+'</div>'
+      +'<span'+ss+'>'+s.n+dailyBadge+diffBadge+'</span>';
+    
+    // 如果还有子任务，显示展开按钮
+    if(s.subtasks && s.subtasks.length > 0) {
+      html += '<span style="color:var(--accent);font-size:11px;margin-left:4px;cursor:pointer;" onclick="event.stopPropagation();toggleSubListRecursive(\''+s.id+'\')">'+(s.subsExpanded!==false?'▼':'▶')+'('+s.subtasks.length+')</span>';
+    }
+    
+    html += '</div>';
+    
+    // 添加嵌套子任务容器
+    if(s.subtasks && s.subtasks.length > 0 && s.subsExpanded !== false) {
+      html += nestedHTML;
+    }
+    
+    return html;
+  });
+  
+  var subListClass = isExpanded ? '' : ' style="display:none"';
+  return toggleBtn + '<div class="subtask-list"'+subListClass+'>'+subRows.join('')+'</div>';
 }
 
 function togTask(id){
@@ -3601,6 +3757,204 @@ function toggleSubList(taskId){
   sv();renderContent();
 }
 
+// 递归展开/收起子任务列表
+function toggleSubListRecursive(itemId){
+  var item = findItemByIdRecursive(itemId);
+  if(item){
+    item.subsExpanded = item.subsExpanded === false ? true : false;
+    sv();renderContent();
+  }
+}
+
+// 递归查找项目（任务或子任务）
+function findItemByIdRecursive(id, items){
+  items = items || S.tasks;
+  if(!items)return null;
+  
+  for(var i=0;i<items.length;i++){
+    if(items[i].id===id)return items[i];
+    if(items[i].subtasks){
+      var found=findItemByIdRecursive(id,items[i].subtasks);
+      if(found)return found;
+    }
+  }
+  return null;
+}
+
+// 递归切换子任务完成状态
+function togNestedSubtask(subtaskId){
+  var subtask = findItemByIdRecursive(subtaskId);
+  if(!subtask)return;
+  
+  subtask.done = !subtask.done;
+  
+  // 如果标记为完成，同时标记所有子任务为完成
+  if(subtask.done && subtask.subtasks){
+    markAllSubtasksDone(subtask.subtasks);
+  }
+  
+  // 检查父任务是否应该标记为完成
+  checkParentTasksDone();
+  
+  sv();renderContent();
+  showToast(subtask.done?'✅ 任务完成':'❌ 已取消完成');
+}
+
+// 递归标记所有子任务为完成
+function markAllSubtasksDone(subtasks){
+  if(!subtasks)return;
+  subtasks.forEach(function(s){
+    s.done = true;
+    if(s.subtasks)markAllSubtasksDone(s.subtasks);
+  });
+}
+
+// 检查所有父任务是否应该标记为完成
+function checkParentTasksDone(){
+  if(!S.tasks)return;
+  S.tasks.forEach(function(t){
+    if(t.subtasks && t.subtasks.length > 0){
+      t.done = checkAllSubtasksDoneRecursive(t.subtasks);
+    }
+  });
+}
+
+// 递归检查所有子任务是否完成
+function checkAllSubtasksDoneRecursive(subtasks){
+  if(!subtasks || subtasks.length === 0)return true;
+  return subtasks.every(function(s){
+    if(!s.done)return false;
+    if(s.subtasks)return checkAllSubtasksDoneRecursive(s.subtasks);
+    return true;
+  });
+}
+
+// 递归编辑子任务
+function openEditSubtaskRecursive(itemId){
+  var item = findItemByIdRecursive(itemId);
+  if(!item)return;
+  
+  // 如果是顶级任务，使用原有的编辑界面
+  var isTopLevel = S.tasks.some(function(t){return t.id===itemId;});
+  if(isTopLevel){
+    openEditTask(itemId);
+    return;
+  }
+  
+  // 否则打开子任务的简易编辑
+  currentEditId = itemId;
+  currentEditType = 'subtask';
+  
+  var box=document.getElementById('m-box');
+  box.innerHTML='<div class="m-title">编辑子任务</div>'
+    +'<div class="m-row"><div class="m-label">子任务名称</div><input class="m-inp" id="edit-n" value="'+item.n+'" placeholder="子任务名称"></div>'
+    +'<div class="m-row"><div class="m-label">当前难度：<span class="diff-badge diff-'+(item.diff||'F')+'">'+(item.diff||'F')+'</span></div></div>'
+    +'<div style="margin:12px 0;">'
+    +'<div style="font-size:12px;color:var(--text2);margin-bottom:8px;">📅 计划日期</div>'
+    +'<div style="display:flex;gap:8px;">'
+    +'<button class="m-btn m-btn-ok" style="flex:1;font-size:12px;padding:8px;" onclick="setNestedSubtaskPlanDate(\''+itemId+'\',0)">今天</button>'
+    +'<button class="m-btn m-btn-ok" style="flex:1;font-size:12px;padding:8px;" onclick="setNestedSubtaskPlanDate(\''+itemId+'\',1)">明天</button>'
+    +'<button class="m-btn m-btn-ok" style="flex:1;font-size:12px;padding:8px;" onclick="setNestedSubtaskPlanDate(\''+itemId+'\',2)">后天</button>'
+    +'<button class="m-btn m-btn-cancel" style="flex:1;font-size:12px;padding:8px;" onclick="setNestedSubtaskPlanDate(\''+itemId+'\',null)">清除</button>'
+    +'</div>'
+    +'</div>'
+    +'<div style="margin:12px 0;">'
+    +'<div style="font-size:12px;color:var(--text2);margin-bottom:8px;">➕ 添加子任务</div>'
+    +'<div style="display:flex;gap:8px;">'
+    +'<input type="text" id="new-nested-subtask" class="m-inp" style="flex:1;" placeholder="输入子任务名称...">'
+    +'<button class="m-btn m-btn-add" style="width:auto;padding:10px 16px;" onclick="addNestedSubtask(\''+itemId+'\')">+</button>'
+    +'</div>'
+    +'</div>'
+    +'<div class="m-btns">'
+    +'<button class="m-btn m-btn-cancel" onclick="closeM()">关闭</button>'
+    +'<button class="m-btn m-btn-del" onclick="deleteNestedSubtask(\''+itemId+'\')">🗑️ 删除</button>'
+    +'<button class="m-btn m-btn-ok" onclick="saveNestedSubtaskEdit()">保存</button>'
+    +'</div>';
+  document.getElementById('m-bg').classList.add('open');
+}
+
+// 设置嵌套子任务的计划日期
+function setNestedSubtaskPlanDate(subtaskId, days){
+  var subtask = findItemByIdRecursive(subtaskId);
+  if(!subtask)return;
+  
+  if(days===null){
+    subtask.planDate = null;
+    showToast('🗑️ 已清除计划日期');
+  }else{
+    var d = new Date();
+    d.setDate(d.getDate()+days);
+    subtask.planDate = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    showToast('📅 已设为 '+subtask.planDate);
+  }
+  sv();
+}
+
+// 添加嵌套子任务
+function addNestedSubtask(parentId){
+  var input = document.getElementById('new-nested-subtask');
+  var name = input?input.value.trim():'';
+  if(!name)return;
+  
+  var parent = findItemByIdRecursive(parentId);
+  if(!parent)return;
+  
+  if(!parent.subtasks)parent.subtasks = [];
+  
+  parent.subtasks.push({
+    id: 'sub'+Date.now()+Math.random().toString(36).substr(2,5),
+    n: name,
+    done: false,
+    diff: 'F',
+    subtasks: []
+  });
+  
+  input.value = '';
+  sv();
+  showToast('✅ 子任务已添加');
+  openEditSubtaskRecursive(parentId);
+}
+
+// 保存嵌套子任务编辑
+function saveNestedSubtaskEdit(){
+  var nEl = document.getElementById('edit-n');
+  if(!nEl)return;
+  
+  var subtask = findItemByIdRecursive(currentEditId);
+  if(subtask){
+    subtask.n = nEl.value.trim();
+    sv();closeM();renderContent();
+    showToast('✅ 已保存');
+  }
+}
+
+// 删除嵌套子任务
+function deleteNestedSubtask(subtaskId){
+  if(!confirm('确定删除这个子任务吗？其所有子任务也会被删除。'))return;
+  
+  // 递归查找并删除
+  function deleteFromParent(parent, id){
+    if(!parent.subtasks)return false;
+    var idx = parent.subtasks.findIndex(function(s){return s.id===id;});
+    if(idx>-1){
+      parent.subtasks.splice(idx,1);
+      return true;
+    }
+    for(var i=0;i<parent.subtasks.length;i++){
+      if(deleteFromParent(parent.subtasks[i],id))return true;
+    }
+    return false;
+  }
+  
+  for(var i=0;i<S.tasks.length;i++){
+    if(deleteFromParent(S.tasks[i],subtaskId)){
+      sv();closeM();renderContent();
+      showToast('🗑️ 已删除');
+      return;
+    }
+  }
+}
+
 function togSubtask(el){
   if(!S.tasks)S.tasks=[];
   var tid=el.getAttribute('data-tid');
@@ -3611,6 +3965,32 @@ function togSubtask(el){
   if(!s)return;
   s.done=!s.done;
   if(t.subtasks.length&&t.subtasks.every(function(x){return x.done;}))t.done=true;
+  sv();renderContent();
+}
+
+// 完成计划子任务（在今日任务中显示的计划子任务）
+function togPlannedSubtask(parentTaskId,parentSubtaskId){
+  if(!S.tasks)S.tasks=[];
+  var t=S.tasks.find(function(x){return x.id===parentTaskId;});
+  if(!t)return;
+  
+  // 递归查找子任务
+  var s=findItemByIdRecursive(parentSubtaskId);
+  if(!s)return;
+  
+  s.done=!s.done;
+  if(s.done){
+    s.planDate=null;// 完成后清除计划日期
+    // 如果该子任务有子任务，全部标记为完成
+    if(s.subtasks)markAllSubtasksDone(s.subtasks);
+    // 检查父任务是否应该标记为完成
+    checkParentTasksDone();
+    addHistory({id:s.id,n:s.n,sub:'',diff:s.diff||'F'},'today');
+    showToast('✅ 计划任务完成！+'+getExp(s.diff||'F')+'经验');
+  }else{
+    removeHistoryByTaskId(s.id);
+    showToast('❌ 已取消完成');
+  }
   sv();renderContent();
 }
 
@@ -3628,24 +4008,41 @@ function openEditTask(taskId){
   currentEditPeriod=t.period||'today';
   
   var box=document.getElementById('m-box');
-  var diffObj=getDiff(t.diff||'E');
-  var subs=t.subtasks||[];
+  var diffObj=getDiff(t.diff||'F');
   var isLong=t.period==='long'||t.period==='longterm';
   
-  var subtasksHTML='';
-  if(subs.length===0){
-    subtasksHTML='<div class="empty-subtasks">暂无子任务</div>';
-  }else{
-    subtasksHTML=subs.map(function(s){
+  // 递归渲染子任务列表（用于编辑界面）
+  function renderEditSubtasks(subtasks, level){
+    if(!subtasks||subtasks.length===0)return '';
+    level=level||0;
+    
+    return subtasks.map(function(s){
       var dailyCheck=isLong?('<span class="daily-checkbox"><input type="checkbox" '+(s.daily?'checked':'')+' disabled>每日</span>'):'';
-      return '<div class="subtask-edit-row">'
-        +'<span class="subtask-diff-badge diff-'+(s.diff||'E')+'">'+(s.diff||'E')+'</span>'
+      var planDateBtn='';
+      if(isLong){
+        var planDateText=s.planDate?('📅 '+s.planDate):'📅 计划';
+        planDateBtn='<button onclick="showPlanDatePicker(\''+s.id+'\')" style="background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;font-size:11px;color:var(--text2);cursor:pointer;white-space:nowrap;margin-left:4px;">'+planDateText+'</button>';
+      }
+      
+      // 递归渲染嵌套子任务
+      var nested=renderEditSubtasks(s.subtasks, level+1);
+      
+      var html='<div class="subtask-edit-row" style="margin-left:'+(level*20)+'px">'
+        +'<span class="subtask-diff-badge diff-'+(s.diff||'F')+'">'+(s.diff||'F')+'</span>'
         +'<span class="subtask-edit-name" style="'+(s.done?'text-decoration:line-through;opacity:.5':'')+'">'+s.n+'</span>'
         +dailyCheck
+        +planDateBtn
+        +'<button onclick="openEditSubtaskRecursive(\''+s.id+'\')" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:2px 8px;font-size:11px;color:var(--accent);cursor:pointer;margin-left:4px;">编辑</button>'
         +'<span class="subtask-edit-del" onclick="delSubtaskFromEdit(\''+s.id+'\')">×</span>'
         +'</div>';
+      
+      if(nested)html+=nested;
+      return html;
     }).join('');
   }
+  
+  var subtasksHTML=renderEditSubtasks(t.subtasks);
+  if(subtasksHTML==='')subtasksHTML='<div class="empty-subtasks">暂无子任务</div>';
   
   var diffColorStyle=(t.diff==='SS'||t.diff==='SSS')?'background:'+diffObj.c+';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text':('color:'+diffObj.c);
   
@@ -3653,7 +4050,7 @@ function openEditTask(taskId){
     +'<div class="edit-hint">💡 在此界面可编辑任务、升级难度、管理子任务或删除任务</div>'
     +'<div class="m-row"><div class="m-label">任务名称</div><input class="m-inp" id="edit-n" value="'+t.n+'" placeholder="任务名称"></div>'
     +'<div class="m-row"><div class="m-label">补充说明</div><input class="m-inp" id="edit-sub" value="'+(t.sub||'')+'" placeholder="补充描述（可选）"></div>'
-    +'<div class="m-row"><div class="m-label">当前难度：<span class="diff-badge diff-'+(t.diff||'E')+'">'+(t.diff||'E')+'</span> <span style="'+diffColorStyle+'">'+diffObj.desc+'</span></div></div>'
+    +'<div class="m-row"><div class="m-label">当前难度：<span class="diff-badge diff-'+(t.diff||'F')+'">'+(t.diff||'F')+'</span> <span style="'+diffColorStyle+'">'+diffObj.desc+'</span></div></div>'
     +(t.diff!=='SSS'?'<button class="m-btn m-btn-ok" style="margin-bottom:16px;width:100%" onclick="showUpgradeInEdit()">⬆ 升级难度</button>':'')
     +'<div class="m-row"><div class="m-label">子任务管理 '+(isLong?'(长期任务可设每日子任务)':'')+'</div></div>'
     +'<div style="margin-bottom:12px;">'+subtasksHTML+'</div>'
@@ -3716,15 +4113,76 @@ function saveEdit(){
   showToast('✅ 已保存');
 }
 
-function delSubtaskFromEdit(subId){
-  if(!currentEditId||currentEditType!=='task')return;
+// ==================== 子任务计划日期功能 ====================
+function showPlanDatePicker(subId){
+  if(!currentEditId)return;
+  
+  var today=new Date();
+  var tomorrow=new Date(today);tomorrow.setDate(tomorrow.getDate()+1);
+  var dayAfter=new Date(today);dayAfter.setDate(dayAfter.getDate()+2);
+  
+  var formatDate=function(d){
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  };
+  
+  var todayStr=formatDate(today);
+  var tomorrowStr=formatDate(tomorrow);
+  var dayAfterStr=formatDate(dayAfter);
+  
+  var box=document.getElementById('m-box');
+  box.innerHTML='<div class="m-title">📅 设置计划日期</div>'
+    +'<div class="edit-hint">💡 设置后，该子任务会在指定日期自动显示在今日任务中</div>'
+    +'<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">'
+    +'<button class="m-btn m-btn-ok" onclick="setSubtaskPlanDate(\''+subId+'\',\''+todayStr+'\')">📅 今天 ('+todayStr+')</button>'
+    +'<button class="m-btn m-btn-ok" onclick="setSubtaskPlanDate(\''+subId+'\',\''+tomorrowStr+'\')">📅 明天 ('+tomorrowStr+')</button>'
+    +'<button class="m-btn m-btn-ok" onclick="setSubtaskPlanDate(\''+subId+'\',\''+dayAfterStr+'\')">📅 后天 ('+dayAfterStr+')</button>'
+    +'<button class="m-btn m-btn-cancel" onclick="setSubtaskPlanDate(\''+subId+'\',null)">🗑️ 清除计划</button>'
+    +'</div>'
+    +'<div class="m-btns">'
+    +'<button class="m-btn m-btn-cancel" onclick="openEditTask(\''+currentEditId+'\')">返回</button>'
+    +'</div>';
+}
+
+function setSubtaskPlanDate(subId,date){
+  if(!currentEditId)return;
   if(!S.tasks)S.tasks=[];
   var t=S.tasks.find(function(x){return x.id===currentEditId;});
   if(!t||!t.subtasks)return;
-  t.subtasks=t.subtasks.filter(function(x){return x.id!==subId;});
-  sv();
+  
+  var sub=t.subtasks.find(function(s){return s.id===subId;});
+  if(sub){
+    sub.planDate=date;
+    sv();
+    var msg=date?('📅 已设为 '+date):'🗑️ 已清除计划';
+    showToast(msg);
+  }
   openEditTask(currentEditId);
-  renderContent();
+}
+
+function delSubtaskFromEdit(subId){
+  if(!currentEditId||currentEditType!=='task')return;
+  if(!S.tasks)S.tasks=[];
+  
+  function deleteFromParent(parent, id){
+    if(!parent.subtasks)return false;
+    var idx=parent.subtasks.findIndex(function(s){return s.id===id;});
+    if(idx>-1){
+      parent.subtasks.splice(idx,1);
+      return true;
+    }
+    // 递归查找
+    for(var i=0;i<parent.subtasks.length;i++){
+      if(deleteFromParent(parent.subtasks[i],id))return true;
+    }
+    return false;
+  }
+  
+  var t=S.tasks.find(function(x){return x.id===currentEditId;});
+  if(t){
+    if(deleteFromParent(t,subId)){
+      sv();openEditTask(currentEditId);renderContent();
+    }
+  }
 }
 
 function openAddSubtaskInEdit(){
@@ -3799,7 +4257,7 @@ function saveSubtaskInEdit(){
   }
   
   if(!t.subtasks)t.subtasks=[];
-  var newSubtask={id:'sub'+Date.now(),n:val,done:false,diff:diff,daily:daily};
+  var newSubtask={id:'sub'+Date.now(),n:val,done:false,diff:diff,daily:daily,subtasks:[]};
   if(daily){
     newSubtask.streak=0;
     newSubtask.failStreak=0;
