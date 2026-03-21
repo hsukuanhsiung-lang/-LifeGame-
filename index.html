@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LifeGame">
+<meta name="theme-color" content="#0a0a0e">
+<title>Life Game v1.2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<!-- 基础样式 -->
+<link rel="stylesheet" href="css/base.css?v=17">
+<link rel="stylesheet" href="css/components.css?v=7">
+
+<!-- 模块样式 -->
+<link rel="stylesheet" href="css/modules/timeline.css">
+<link rel="stylesheet" href="css/modules/tasks.css">
+<link rel="stylesheet" href="css/modules/actions.css">
+<link rel="stylesheet" href="css/modules/challenges.css">
+<link rel="stylesheet" href="css/modules/profile.css">
+<link rel="stylesheet" href="css/modules/memory.css">
+<link rel="stylesheet" href="css/modules/guide.css">
+<link rel="stylesheet" href="css/modules/history.css">
+<link rel="stylesheet" href="css/modules/overview.css">
+</head>
+<body>
+<!-- 头部 -->
+<div id="g-header">
+  <div id="g-header-inner">
+    <div>
+      <div class="g-title">Life Game</div>
+      <div class="g-sub" id="g-day">Day: 1</div>
+    </div>
+    <div class="g-time" id="g-time">00:00</div>
+    <div class="g-day" id="g-date">01-01</div>
+  </div>
+</div>
+
+<!-- 导航栏 -->
+<div id="nav-bar">
+  <button id="nav-back-btn" onclick="goBackNav()">← 返回</button>
+  <div id="list-title">选择世界</div>
+  <button id="add-btn" onclick="openAdd()">+ 新增</button>
+</div>
+
+<!-- Level 1: 世界选择 - 全屏独立层 -->
+<div id="nav-level-1" class="nav-level nav-level-1 active">
+  <div class="world-select-container">
+    <div class="world-top-row">
+      <!-- 表世界 -->
+      <div class="world-card surface-card" onclick="enterLevel2('surface')">
+        <div class="world-card-bg">
+          <div class="city-silhouette"></div>
+          <div class="sun"></div>
+        </div>
+        <div class="world-card-content">
+          <div class="world-icon">🌍</div>
+          <div class="world-title">表世界</div>
+          <div class="world-subtitle">Surface World</div>
+          <div class="world-desc">现实生活 · 日常记录 · 行动规划</div>
+          <div class="world-features">
+            <span>⏱️ 时间</span>
+            <span>⚡ 行动</span>
+            <span>📋 任务</span>
+          </div>
+        </div>
+      </div>
+      <!-- 里世界 -->
+      <div class="world-card inner-card" onclick="enterLevel2('inner')">
+        <div class="world-card-bg">
+          <div class="stars"></div>
+          <div class="portal"></div>
+        </div>
+        <div class="world-card-content">
+          <div class="world-icon">🌙</div>
+          <div class="world-title">里世界</div>
+          <div class="world-subtitle">Inner World</div>
+          <div class="world-desc">游戏世界 · 等级成长 · 属性装备</div>
+          <div class="world-features">
+            <span>👤 角色属性</span>
+            <span>💎 装备技能</span>
+            <span>🗺️ 世界地图</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 下线 -->
+    <div class="world-card offline-card" onclick="enterLevel2('offline')">
+      <div class="world-card-bg">
+        <div class="moon"></div>
+        <div class="clouds"></div>
+      </div>
+      <div class="world-card-content">
+        <div class="world-icon">😴</div>
+        <div class="world-title">下线</div>
+        <div class="world-subtitle">Offline Mode</div>
+        <div class="world-desc">休息恢复 · 睡眠冥想 · 反思整理</div>
+        <div class="world-features">
+          <span>🌙 睡眠</span>
+          <span>🧘 冥想</span>
+          <span>📝 日记</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 导航容器 (Level 2-6) -->
+<div class="nav-container" id="nav-container">
+  <div id="nav-level-2" class="nav-level nav-level-2">
+    <div id="secondary-tabs" class="secondary-tabs"></div>
+  </div>
+  <div id="nav-level-3" class="nav-level nav-level-3">
+    <div id="tertiary-tabs" class="tertiary-tabs"></div>
+  </div>
+  <div id="nav-level-4" class="nav-level nav-level-4">
+    <div id="quaternary-tabs" class="quaternary-tabs"></div>
+  </div>
+  <div id="nav-level-5" class="nav-level nav-level-5">
+    <div id="quinary-tabs" class="quinary-tabs"></div>
+  </div>
+  <div id="nav-level-6" class="nav-level nav-level-6">
+    <div id="senary-tabs"></div>
+  </div>
+</div>
+
+<!-- 主内容区 -->
+<div id="app">
+  <div id="content-area"></div>
+</div>
+
+<!-- 模态框 -->
+<div id="m-bg">
+  <div id="m-box"></div>
+</div>
+
+<!-- Toast提示 -->
+<div id="toast"></div>
+
+<!-- 加载提示 -->
+<div id="loading-overlay">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">加载中...</div>
+    <div class="loading-version">Life Game v1.2.0</div>
+  </div>
+</div>
+
+<!-- 错误提示 -->
+<div id="error-overlay">
+  <div class="error-content">
+    <div class="error-icon">⚠️</div>
+    <div class="error-title">加载失败</div>
+    <div class="error-message" id="error-message">请检查网络连接或刷新页面重试</div>
+    <div class="error-actions">
+      <button class="error-btn primary" onclick="location.reload()">刷新页面</button>
+      <button class="error-btn secondary" onclick="document.getElementById('error-overlay').classList.remove('show')">忽略</button>
+    </div>
+  </div>
+</div>
+
+<!-- 向导悬浮按钮 -->
+<div id="guide-float-btn" onclick="openGuideChat()">
+  <span class="guide-float-icon">👾</span>
+  <span class="guide-float-hint">向导</span>
+</div>
+
+<!-- 向导聊天弹窗 -->
+<div id="guide-chat-overlay" onclick="if(event.target===this)closeGuideChat()">
+  <div id="guide-chat-box">
+    <div id="guide-chat-header">
+      <span>AI向导</span>
+      <button onclick="closeGuideChat()">×</button>
+    </div>
+    <div id="guide-chat-messages"></div>
+    <div id="guide-chat-input-area">
+      <input type="text" id="guide-chat-input" placeholder="输入消息...">
+      <button onclick="sendGuideChatMessage()">发送</button>
+    </div>
+  </div>
+</div>
+
+<!-- 数据层 -->
+<script src="js/data/constants.js"></script>
+
+<!-- 核心层 -->
+<script src="js/core/utils.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/core/router.js"></script>
+<script src="js/core/app.js"></script>
+
+<!-- 功能模块层 -->
+<script src="js/modules/timeline.js"></script>
+<script src="js/modules/tasks.js"></script>
+<script src="js/modules/actions.js"></script>
+<script src="js/modules/challenges.js"></script>
+<script src="js/modules/profile.js"></script>
+<script src="js/modules/memory.js"></script>
+<script src="js/modules/guide.js?v=2"></script>
+<script src="js/modules/history.js"></script>
+<script src="js/modules/settings.js"></script>
+<script src="js/modules/overview.js"></script>
+
+<!-- 初始化应用 -->
+<script>
+  // ESC键关闭模态框
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var mbg = document.getElementById('m-bg');
+      if (mbg && mbg.classList.contains('open')) {
+        mbg.classList.remove('open');
+      }
+    }
+  });
+
+  // 点击背景关闭模态框
+  document.getElementById('m-bg').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('open');
+    }
+  });
+
+  // init() 在 app.js 的 DOMContentLoaded 中调用，这里不需要重复调用
+</script>
+</body>
+</html>
+
